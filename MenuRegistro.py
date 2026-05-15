@@ -7,12 +7,14 @@ contraseña3 = None
 
 while True:
     
+    print("")
     print("--MENU--")
     print("1) Iniciar sesion.")
     print("2) Registrar usuario.")
     print("3) Salir.")
+    print("")
 
-  
+    ##VALIDAMOS QUE SE INGRESE UN NUMERO
     try:
         opcion = int(input("Ingrese una opcion (1-3): "))
 
@@ -26,6 +28,10 @@ while True:
             
         
     if opcion == 1:
+        
+        #validamos que tengamos usuarios registrados, si no hay usuarios
+        #tenemos que ir a la opcion 2, pero si hay caemos en el else
+        #comprobando con parentesis si una de las condiciones se cumplen para ir al siguiente menu
 
         if usuario1 == None and usuario2 == None and usuario3 == None:
             print("Es necesario registrar un usuario antes.")
@@ -38,9 +44,12 @@ while True:
                 print("Inicio de sesion correcto")
 
                 while True:
+
+                    print("")
                     print("1)Realizar llamadas.")
                     print("2)Enviar correo electronico.")
                     print("3)Cerrar sesion.")
+                    print("")
 
                     try:
                         opcion2 = int(input("Ingrese una opcion (1-3): "))
@@ -54,28 +63,55 @@ while True:
                             continue
                     
                     if opcion2 == 1:
-                        print("Ingrese numero")
+                        
+                        numero = input("Ingrese el numero que desea llamar: ")
+
+                        #len recorre valida que sean 9 caracteres y startswitch valida que empiece en 9
+                        
+                        if len(numero) == 9 and numero.startswith("9"):
+                            print("Realizando llamado..")
+                        else:
+                            print("Numero incorrecto.")
+
 
                     elif opcion2 == 2:
-                        print("Ingrese correo")
+                        
+                        correo = input("Ingrese el correo donde desea mandar el email: ")
+
+                        tiene_arroba = False
+
+                        #usamos la variable letra donde se guardara cada caracter mientras el for la recorre
+                        #cuando se comprueba que existe el arroba cambia la bandera a true
+
+                        for letra in correo:
+                            
+                            if letra == "@":
+                                tiene_arroba = True
+                                
+                        if tiene_arroba == True:
+                            mensaje = input("Ingrese el mensaje: ") 
+                            print("Correo enviado.")       
+
+                        elif tiene_arroba == False:
+                            print("Correo invalido")        
+                            
 
                     elif opcion2 == 3:
                         print("Cerrando sesion...")
                         break
                     else:
                         print("Opcion invalida")
-                    
-
-                     
-
 
             else:
                 print("Inicio de sesion incorrecto.")
 
 
-
-
     elif opcion == 2:
+       
+       #vemos si hay usuarios registrados comprobando
+       #cada una, si no hay usuario pedira registrar 
+       #los datos
+
         print("--Registro de usuario--")
         if usuario1 == None:
             usuario1 = input("Ingrese el nombre de usuario a registrar: ")
@@ -94,10 +130,6 @@ while True:
 
         else:
             print("No se pueden registrar mas usuarios.")
-
-
-
-
 
 
     elif opcion == 3:
